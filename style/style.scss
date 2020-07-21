@@ -1,4 +1,3 @@
-@import "../../node_modules/normalize.css/normalize.css";
 //Variables
 //colors
 /* SCSS HEX */
@@ -11,6 +10,13 @@ $yellow-orange: #ffa737;
 $gap-size: 30px;
 $tile-bg: #f50000;
 
+//Mixins
+@mixin shadow($shadow: 40px) {
+  border-radius: 1rem;
+  box-shadow: 0 0 $shadow rgba(0, 0, 0, 0.39),
+  inset 0 0 5px rgba(255, 255, 255, 0.16);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -18,13 +24,14 @@ body {
   align-items: center;
   background: $fulvous;
   height: 100vh;
+
+  letter-spacing: 1px;
+  line-height: 120%;
+
 }
 
 .main-board {
-  border-radius: 1rem;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.39),
-  inset 0 0 5px rgba(255, 255, 255, 0.16);
-  border: 1px solid red;
+  @include shadow;
 
   //perfect responsive square
   max-width: 70vh;
@@ -46,36 +53,40 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.main-board__header {
+.game-board{
   display: flex;
   flex-direction: column;
-  align-content: space-between;
-
-  h1 {
-    margin-bottom: 8rem;
-  }
+  align-items: center;
+  justify-content: center;
 }
+
 
 //Draw Hash and add some animates
 #drawHash {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(#{$gap-size} * 9);
+  width: calc(#{$gap-size} * 9);
 }
+
 .line {
-  position: absolute;
-  top: calc(50% - 2px);
-  left: 0;
   height: 4px;
   max-width: 200px;
   width: 100%;
   background: $jet;
+  top: 0;
+  left: 0;
 
   animation: 1s ease-out 0s 1 lineMove;
 
   &1 {
     transform: translateY($gap-size);
+
     &:before,
     &:after {
       animation: 1.2s linear 1.4s 1 forwards appear;
@@ -101,7 +112,7 @@ body {
       opacity: 0;
 
       transform-origin: right center;
-      transform: translate(64px, -47px);
+      transform: translate(80px, -47px);
       animation: .8s linear 1.2s 1 forwards appear;
     }
   }
@@ -160,33 +171,46 @@ body {
   }
 }
 
-.main-board__footer{
-  margin-bottom:35%;
+.main-board__footer {
+  //margin-bottom: 35%;
 }
 
-.button{
-  background: linear-gradient(to top right, $brown, $yellow-orange 30%);
-  border: none;
-  padding: .4rem 1rem;
+.button {
+  $padding: 1.2rem;
+  @include shadow(.4rem);
+  background: $yellow-orange;
+  padding: calc(#{$padding} - .5rem) $padding;
   border-radius: 1rem;
+  letter-spacing: inherit;
+  border: none;
+  transition: .4s ease-out background, .2s color;
+
+  &:not(:last-of-type) {
+    margin-right: 1.4rem;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0);
+    box-shadow: none;
+    color: #fff;
+    border: 2px solid $yellow-orange;
+    padding: calc(calc(#{$padding} - .5rem) - 2px) calc(#{$padding} - 2px);
+  }
+
+}
+
+.button-appear,
+.title-appear {
+  opacity: 0;
+  animation: 1s linear 2s 1 forwards appear;
+
 }
 
 
+@keyframes appear {
+  100% {
+    opacity: 1;
+  }
+}
 
-//test animation
-//.drawHash:hover .line {
-//  animation: 1s ease infinite tictactoe;
-//}
-//@keyframes tictactoe {
-//  0% {
-//    background: $tile-bg;
-//  }
-//
-//  50% {
-//    background: darken($tile-bg, 90%);
-//  }
-//
-//  100% {
-//    background: $tile-bg;
-//  }
-//}
+

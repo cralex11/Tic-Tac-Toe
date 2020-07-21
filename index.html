@@ -6,7 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/normalize.css">
+
     <script src="https://kit.fontawesome.com/eda8122917.js" crossorigin="anonymous"></script>
 
     <title>Tic Tac Toe</title>
@@ -14,21 +16,23 @@
 <body>
 <script src="script.js"></script>
 <div class="main-board">
-   <div class="main-board__content">
-       <header class="main-board__header">
-           <h1>Tic Tac Toe</h1>
-           <div id="drawHash">
-               <div class="line line1"></div>
-               <div class="line line2"></div>
-               <div class="line line3"></div>
-               <div class="line line4"></div>
-           </div>
-       </header>
-       <footer class="main-board__footer">
-           <button class="button">Single Player</button>
-           <button class="button">Multiplayer</button>
-       </footer>
-   </div>
+    <div class="main-board__content">
+        <h1 class="title title-appear"><a href="#">Tic Tac Toe</a></h1>
+        <div class="game-board">
+            <header class="main-board__header">
+                <div id="drawHash">
+                    <div class="line line1"></div>
+                    <div class="line line2"></div>
+                    <div class="line line3"></div>
+                    <div class="line line4"></div>
+                </div>
+            </header>
+            <footer class="main-board__footer">
+                <button class="button button-appear">Single Player</button>
+                <button class="button button-appear">Multiplayer</button>
+            </footer>
+        </div>
+    </div>
 </div>
 </body>
 </html>

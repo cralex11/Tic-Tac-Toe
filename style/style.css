@@ -1,0 +1,162 @@
+/* SCSS HEX */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #dc851fff;
+  height: 100vh;
+  letter-spacing: 1px;
+  line-height: 120%;
+}
+
+.main-board {
+  border-radius: 1rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.39), inset 0 0 5px rgba(255, 255, 255, 0.16);
+  max-width: 70vh;
+  width: 80%;
+  position: relative;
+}
+.main-board:after {
+  content: "";
+  display: block;
+  padding-top: calc(100%);
+}
+
+.main-board__content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#drawHash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(30px * 9);
+  width: calc(30px * 9);
+}
+
+.line {
+  height: 4px;
+  max-width: 200px;
+  width: 100%;
+  background: #343330ff;
+  top: 0;
+  left: 0;
+  animation: 1s ease-out 0s 1 lineMove;
+}
+.line1 {
+  transform: translateY(30px);
+}
+.line1:before, .line1:after {
+  animation: 1.2s linear 1.4s 1 forwards appear;
+}
+.line2 {
+  transform: translateY(-30px);
+}
+.line3 {
+  transform: rotate(90deg) translateY(30px);
+}
+.line3:before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.47);
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  transform-origin: right center;
+  transform: translate(80px, -47px);
+  animation: 0.8s linear 1.2s 1 forwards appear;
+}
+.line4 {
+  transform: rotate(90deg) translateY(-30px);
+}
+.line4:before, .line4:after {
+  animation: 0.8s linear 1s 1 forwards appear;
+}
+.line1:before, .line1:after, .line4:before, .line4:after {
+  content: "";
+  display: block;
+  width: calc(200px / 3 - 16px);
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.47);
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+}
+.line1:after, .line4:after {
+  transform-origin: left center;
+  transform: translate(10px, 10px) rotate(45deg);
+}
+.line1:before, .line4:before {
+  transform-origin: right center;
+  transform: translate(-10px, 10px) rotate(-45deg);
+}
+@keyframes lineMove {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.button {
+  border-radius: 1rem;
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.39), inset 0 0 5px rgba(255, 255, 255, 0.16);
+  background: #ffa737;
+  padding: calc(1.2rem - .5rem) 1.2rem;
+  border-radius: 1rem;
+  letter-spacing: inherit;
+  border: none;
+  transition: 0.4s ease-out background, 0.2s color;
+}
+.button:not(:last-of-type) {
+  margin-right: 1.4rem;
+}
+.button:hover {
+  background: rgba(0, 0, 0, 0);
+  box-shadow: none;
+  color: #fff;
+  border: 2px solid #ffa737;
+  padding: calc(calc(1.2rem - .5rem) - 2px) calc(1.2rem - 2px);
+}
+
+.button-appear,
+.title-appear {
+  opacity: 0;
+  animation: 1s linear 2s 1 forwards appear;
+}
+
+@keyframes appear {
+  100% {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
