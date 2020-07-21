@@ -1,0 +1,192 @@
+@import "../../node_modules/normalize.css/normalize.css";
+//Variables
+//colors
+/* SCSS HEX */
+$jet: #343330ff;
+$rifle-green: #45462aff;
+$brown: #7e5920ff;
+$fulvous: #dc851fff;
+$yellow-orange: #ffa737;
+
+$gap-size: 30px;
+$tile-bg: #f50000;
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $fulvous;
+  height: 100vh;
+}
+
+.main-board {
+  border-radius: 1rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.39),
+  inset 0 0 5px rgba(255, 255, 255, 0.16);
+  border: 1px solid red;
+
+  //perfect responsive square
+  max-width: 70vh;
+  width: 80%;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    padding-top: calc(100%);
+  }
+}
+
+.main-board__content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-board__header {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+
+  h1 {
+    margin-bottom: 8rem;
+  }
+}
+
+//Draw Hash and add some animates
+#drawHash {
+  position: relative;
+}
+.line {
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 0;
+  height: 4px;
+  max-width: 200px;
+  width: 100%;
+  background: $jet;
+
+  animation: 1s ease-out 0s 1 lineMove;
+
+  &1 {
+    transform: translateY($gap-size);
+    &:before,
+    &:after {
+      animation: 1.2s linear 1.4s 1 forwards appear;
+    }
+  }
+
+  &2 {
+    transform: translateY(-$gap-size);
+  }
+
+  &3 {
+    transform: rotate(90deg) translateY($gap-size);
+
+    &:before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      border: 2px solid rgba(255, 255, 255, 0.47);
+      top: 0;
+      bottom: 0;
+      opacity: 0;
+
+      transform-origin: right center;
+      transform: translate(64px, -47px);
+      animation: .8s linear 1.2s 1 forwards appear;
+    }
+  }
+
+  &4 {
+    transform: rotate(90deg) translateY(-$gap-size);
+
+    &:before,
+    &:after {
+      animation: .8s linear 1s 1 forwards appear;
+    }
+  }
+
+  &1,
+  &4 {
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      width: calc(200px / 3 - 16px);
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.47);
+      top: 0;
+      bottom: 0;
+      opacity: 0;
+    }
+
+    &:after {
+      transform-origin: left center;
+      transform: translate(10px, 10px) rotate(45deg);
+    }
+
+    &:before {
+      transform-origin: right center;
+      transform: translate(-10px, 10px) rotate(-45deg);
+    }
+  }
+
+  @keyframes lineMove {
+    0% {
+      opacity: 0;
+    }
+    50% {
+
+      transform: translateY(0);
+      opacity: 0;
+    }
+  }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.main-board__footer{
+  margin-bottom:35%;
+}
+
+.button{
+  background: linear-gradient(to top right, $brown, $yellow-orange 30%);
+  border: none;
+  padding: .4rem 1rem;
+  border-radius: 1rem;
+}
+
+
+
+//test animation
+//.drawHash:hover .line {
+//  animation: 1s ease infinite tictactoe;
+//}
+//@keyframes tictactoe {
+//  0% {
+//    background: $tile-bg;
+//  }
+//
+//  50% {
+//    background: darken($tile-bg, 90%);
+//  }
+//
+//  100% {
+//    background: $tile-bg;
+//  }
+//}
