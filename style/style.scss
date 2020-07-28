@@ -10,6 +10,7 @@ $yellow-orange: #ffa737;
 $gap-size: 30px;
 $tile-bg: #f50000;
 
+//general
 //Mixins
 @mixin shadow($shadow: 40px) {
   border-radius: 1rem;
@@ -29,6 +30,26 @@ body {
   line-height: 120%;
 
 }
+
+//Reusable
+input,
+input:active {
+  border: none;
+  outline: none;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+input {
+  background: $yellow-orange;
+  padding: .4rem;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
 
 .main-board {
   @include shadow;
@@ -64,7 +85,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 60%;
   width: 60%;
 }
@@ -78,6 +99,7 @@ body {
   justify-content: center;
   height: calc(#{$gap-size} * 9);
   width: calc(#{$gap-size} * 9);
+  margin-top: -40%;
 }
 
 .line {
@@ -219,6 +241,34 @@ body {
   }
 }
 
+//Players name
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 4rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-bottom: .8rem;
+    }
+  }
+
+  input {
+    margin-top: .2rem;
+
+    &:focus {
+      box-shadow: 1px 2px 4px #75391d;
+    }
+  }
+}
+
 
 //part 2
 .square {
@@ -232,6 +282,10 @@ body {
 
 .miniSquare {
   $border-color: $jet;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   &1,
   &2,
@@ -261,7 +315,8 @@ body {
 
 .o {
   position: relative;
-  &:before{
+
+  &:before {
     content: '';
     position: absolute;
     width: 80px;
@@ -277,7 +332,7 @@ body {
 
 .x {
   position: absolute;
-  animation: .4s cubic-bezier(.46,-0.72,.33,1.59) 1 forwards appear;
+  animation: .4s cubic-bezier(.46, -0.72, .33, 1.59) 1 forwards appear;
   opacity: 0;
 
   &:before,
@@ -310,7 +365,7 @@ body {
 }
 
 @keyframes appear {
-  100%{
+  100% {
     opacity: 1;
   }
 }

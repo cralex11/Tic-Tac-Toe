@@ -60,21 +60,22 @@ const gameplay = (() => {
     }
 
     //toggle class on click to add x or o
-    square.addEventListener('click', (e) => {
-        if (e.target !== e.currentTarget) {
-            const clickedItem = e.target
-            let clickedItemClass = e.target.classList[1]
-            if (clickedItem.classList[2] !== 'clicked') {
-                if (!clickedItemClass) {
-                    clickedItemClass = e.target.parentNode.classList[1]
+    if (square)
+        square.addEventListener('click', (e) => {
+            if (e.target !== e.currentTarget) {
+                const clickedItem = e.target
+                let clickedItemClass = e.target.classList[1]
+                if (clickedItem.classList[2] !== 'clicked') {
+                    if (!clickedItemClass) {
+                        clickedItemClass = e.target.parentNode.classList[1]
+                    }
+                    // clickedItem.appendChild(createChild('div', 'o'))
+                    clickedItem.appendChild(createChild('div', 'x'))
+                    clickedItem.classList.add('clicked')
                 }
-                clickedItem.appendChild(createChild('div', 'o'))
-                // clickedItem.appendChild(createChild('div', 'x'))
-                clickedItem.classList.add('clicked')
             }
-        }
-        e.stopPropagation()
-    }, false)
+            e.stopPropagation()
+        }, false)
 
 
 })()
@@ -91,11 +92,6 @@ const gameplay = (() => {
 //     elem.addEventListener('click', ToggleClass, false)
 // })
 
-
-//test
-
-const sandu = Player('sandu', true)
-
 //handy functions
 const clear = () => {
     console.clear();
@@ -108,6 +104,10 @@ setTimeout(function () {
     clear();
 }, 1000);
 
+
+//test
+
+const sandu = Player('sandu', true)
 
 
 
