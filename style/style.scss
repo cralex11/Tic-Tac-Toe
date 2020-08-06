@@ -28,6 +28,7 @@ body {
 
   letter-spacing: 1px;
   line-height: 120%;
+  overflow: hidden;
 
 }
 
@@ -95,13 +96,6 @@ button {
 
 
 #game-board {
-  //display: flex;
-  //flex-direction: column;
-  //align-items: center;
-  //justify-content: space-evenly;
-  //height: 60%;
-  //width: 60%;
-  background: black;
   display: grid;
   grid-template-rows: 3fr 1fr;
 
@@ -113,7 +107,6 @@ button {
 }
 
 .main-board__header {
-  background-color: #75391d;
   position: relative;
 }
 
@@ -224,8 +217,6 @@ button {
 }
 
 .main-board__footer {
-  //margin-bottom: 35%;
-  background-color: #445544;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -277,12 +268,12 @@ button {
 //Players name
 .players {
   position: absolute;
-  //display: flex;
+  opacity: 0;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   height: 100%;
-  display: none;
 
   label {
     display: flex;

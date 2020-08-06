@@ -74,18 +74,27 @@ const startScreenRender = (() => {
     const drawHash = document.querySelector('#drawHash')
     const PlayersInfo = document.querySelector('.players')
     choseMode[1].addEventListener('click', () => {
-
-        drawHash.classList.add('change')
-        setTimeout(()=>{
-            drawHash.style.display = 'none'
-        },500)
-
-        setTimeout(()=>{
-            PlayersInfo.classList.add('income')
-            PlayersInfo.style.display = 'flex'
-        },0)
+        //
+        // drawHash.classList.add('change')
+        // setTimeout(()=>{
+        //     drawHash.style.display = 'none'
+        // },500)
+        //
+        // setTimeout(()=>{
+        //     PlayersInfo.classList.add('income')
+        //     PlayersInfo.style.display = 'flex'
+        // },0)
+        //animation Multiplayer button press
+        let anim = true
+        if (anim) {
+            const timeLine = gsap.timeline()
+            gsap.to('#drawHash', {duration: .2, opacity: 0, x: '-25%', ease: 'back.in'})
+            gsap.to('.players', {duration: .4, opacity: 1, ease: 'back.out', delay: .4})
+            gsap.from('.players', {duration: .4, x: '25%', ease: 'back.out', delay: .4})
+            console.log(anim)
+        }
     })
-    return {choseMode, drawHash}
+    return {choseMode, drawHash, anim}
 })()
 // const choseMode = (() => {
 //     const gameBoard = document.getElementById('game-board')

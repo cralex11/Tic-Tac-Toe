@@ -8,6 +8,7 @@ body {
   height: 100vh;
   letter-spacing: 1px;
   line-height: 120%;
+  overflow: hidden;
 }
 
 input,
@@ -61,7 +62,6 @@ button:active, button:focus, button:visited {
 }
 
 #game-board {
-  background: black;
   display: grid;
   grid-template-rows: 3fr 1fr;
   row-gap: 1rem;
@@ -70,7 +70,6 @@ button:active, button:focus, button:visited {
 }
 
 .main-board__header {
-  background-color: #75391d;
   position: relative;
 }
 
@@ -160,7 +159,6 @@ button:active, button:focus, button:visited {
 }
 
 .main-board__footer {
-  background-color: #445544;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,11 +201,12 @@ button:active, button:focus, button:visited {
 }
 .players {
   position: absolute;
+  opacity: 0;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   height: 100%;
-  display: none;
 }
 .players label {
   display: flex;
