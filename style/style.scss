@@ -50,7 +50,19 @@ input {
   border-radius: 10px;
 }
 
+button {
 
+
+  &:active,
+  &:focus,
+  &:visited {
+    outline: none;
+  }
+
+}
+
+
+//classes
 .main-board {
   @include shadow;
 
@@ -81,25 +93,39 @@ input {
   top: 0;
 }
 
+
 #game-board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 60%;
-  width: 60%;
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
+  //justify-content: space-evenly;
+  //height: 60%;
+  //width: 60%;
+  background: black;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+
+  row-gap: 1rem;
+
+
+  height: 100%;
+  width: 100%;
 }
 
+.main-board__header {
+  background-color: #75391d;
+  position: relative;
+}
 
 //Draw Hash and add some animates
 #drawHash {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(#{$gap-size} * 9);
-  width: calc(#{$gap-size} * 9);
-  margin-top: -40%;
 }
 
 .line {
@@ -107,8 +133,6 @@ input {
   max-width: 200px;
   width: 100%;
   background: $jet;
-  top: 0;
-  left: 0;
 
   animation: 1s ease-out 0s 1 lineMove;
 
@@ -201,6 +225,11 @@ input {
 
 .main-board__footer {
   //margin-bottom: 35%;
+  background-color: #445544;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .button {
@@ -225,6 +254,10 @@ input {
     padding: calc(calc(#{$padding} - .5rem) - 2px) calc(#{$padding} - 2px);
   }
 
+  &:active {
+    color: #000;
+  }
+
 }
 
 .button-appear,
@@ -243,17 +276,19 @@ input {
 
 //Players name
 .players {
-  display: flex;
+  position: absolute;
+  //display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 4rem;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  display: none;
 
   label {
     display: flex;
     flex-direction: column;
-    align-items: center;
     cursor: pointer;
+    align-items: center;
 
     &:not(:last-child) {
       margin-bottom: .8rem;
@@ -358,6 +393,22 @@ input {
 }
 
 
+//animation classes
+
+.change {
+  animation: .4s cubic-bezier(.78, -.5, 0, 1.28) change forwards;
+}
+
+.income {
+  transform: translateX(100%);
+  opacity: 0;
+  height: 270px;
+  margin-top: -108px;
+  animation: .6s cubic-bezier(.78, -1.71, 0, 1.28) income forwards;
+
+}
+
+
 @keyframes border {
   100% {
     box-shadow: 0 0 0 3px #454;
@@ -366,6 +417,25 @@ input {
 
 @keyframes appear {
   100% {
+    opacity: 1;
+  }
+}
+
+@keyframes change {
+  100% {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+}
+
+@keyframes income {
+  100% {
+    transform: translateX(0);
     opacity: 1;
   }
 }

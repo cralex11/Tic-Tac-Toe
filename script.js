@@ -1,25 +1,13 @@
 'use strict'
 console.log("Script is loaded successful")
 
+/* -------------------------------------------------------------------------- */
+//                              Main functions
+/* -------------------------------------------------------------------------- */
 
-const choseMode = (() => {
-    const gameBoard = document.getElementById('game-board')
-    const single = document.getElementById('single')
-    const multi = document.getElementById('multi')
 
-    const clearBoard = () => {
-        gameBoard.innerHTML = ''
-    }
+/*------ Chose GameMode Single/Multi ------*/
 
-    if (multi)
-        multi.addEventListener('click', () => {
-
-            clearBoard()
-
-        })
-
-    return {multi, clearBoard}
-})()
 
 //player function to create player with stats and proprieties
 const Player = (name, isFirst) => {
@@ -45,6 +33,7 @@ const Player = (name, isFirst) => {
 }
 
 
+/*------ func that render game ------*/
 const gameplay = (() => {
     const square = document.querySelector(".square")
     const createChild = (tag = 'div', className = '', id = '') => {
@@ -80,6 +69,43 @@ const gameplay = (() => {
 
 })()
 
+const startScreenRender = (() => {
+    const choseMode = document.querySelectorAll('.choseMode')
+    const drawHash = document.querySelector('#drawHash')
+    const PlayersInfo = document.querySelector('.players')
+    choseMode[1].addEventListener('click', () => {
+
+        drawHash.classList.add('change')
+        setTimeout(()=>{
+            drawHash.style.display = 'none'
+        },500)
+
+        setTimeout(()=>{
+            PlayersInfo.classList.add('income')
+            PlayersInfo.style.display = 'flex'
+        },0)
+    })
+    return {choseMode, drawHash}
+})()
+// const choseMode = (() => {
+//     const gameBoard = document.getElementById('game-board')
+//     const single = document.getElementById('single')
+//     const multi = document.getElementById('multi')
+//
+//     const clearBoard = () => {
+//         gameBoard.innerHTML = ''
+//     }
+//
+//     if (multi)
+//         multi.addEventListener('click', () => {
+//
+//             clearBoard()
+//
+//         })
+//
+//     return {multi, clearBoard}
+// })()
+
 // const squares = document.getElementsByClassName('miniSquare'),
 //     ToggleClass = () => {
 //         [].map.call(squares, function (elem) {
@@ -108,6 +134,8 @@ setTimeout(function () {
 //test
 
 const sandu = Player('sandu', true)
+
+
 
 
 
