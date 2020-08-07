@@ -194,6 +194,11 @@ button:active, button:focus, button:visited {
   animation: 1s linear 2s 1 forwards appear;
 }
 
+.start {
+  display: none;
+  align-self: center;
+}
+
 @keyframes appear {
   100% {
     opacity: 1;
