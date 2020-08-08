@@ -74,21 +74,48 @@ const startScreenRender = (() => {
     const drawHash = document.querySelector('#drawHash')
     const PlayersInfo = document.querySelector('.players')
 
+    //multiplayer button click action
     choseMode[1].addEventListener('click', () => {
-        const timeLine = gsap.timeline({defaults: {duration: .4}})
-        timeLine.to('#drawHash', {duration: .3, opacity: 0, x: '-25%', ease: 'back.in'})
-            .to('.players', {opacity: 1, ease: 'back.out'})
-            .from('.players', {x: '25%', ease: 'back.out'}, '-=.4')
-            .to('.choseMode', {
-                duration: .2, scale: 0, display: 'none', ease: 'back.in', x: (i, elem, buttons) => {
-                    return i % 2 === 1 ? -100 : 100
+
+    })
+    //one event listener for all buttons
+    const mainBoardFooter = document.querySelector('.main-board__footer')
+    if (mainBoardFooter)
+        mainBoardFooter.addEventListener('click', (e) => {
+            if (e.target.getAttribute('type') === 'button') {
+                const butt = e.target
+
+                console.log(butt.classList)
+                if (butt.classList.contains('multiPlayer')) {
+                    const timeLine = gsap.timeline({defaults: {duration: .4}})
+                    timeLine.to('#drawHash', {duration: .3, opacity: 0, x: '-25%', ease: 'back.in'})
+                        .to('.players', {opacity: 1, ease: 'back.out'})
+                        .from('.players', {x: '25%', ease: 'back.out'}, '-=.4')
+                        .to('.choseMode', {
+                            duration: .2, scale: 0, display: 'none', ease: 'back.in', x: (i, elem, buttons) => {
+                                return i % 2 === 1 ? -100 : 100
+                            }
+                        }, '-=.6')
+                        .fromTo('.start', {duration: 0, scale: 0}, {
+                            display: 'flex',
+                            scale: 1,
+                            ease: 'back.out'
+                        }, '-=.4')
                 }
-            }, '-=.6')
-            .fromTo('.start', {duration: 0, scale: 0}, {display: 'flex', scale: 1, ease: 'back.out'}, '-=.4')
+
+            }
+        })
+
+
+    // h1 click to reload page
+    const mainHeader = document.querySelector('.title')
+    mainHeader.addEventListener('click', () => {
+        rel()
+        console.log('hmm, works')
     })
 
 
-    return {choseMode, drawHash}
+    return {choseMode}
 })()
 // const choseMode = (() => {
 //     const gameBoard = document.getElementById('game-board')
