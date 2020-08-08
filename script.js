@@ -48,6 +48,16 @@ const gameplay = (() => {
         return child
     }
 
+    const changeSign = (clickedItem) => {
+        if (steps % 2 === 1)
+            clickedItem.appendChild(createChild('div', 'x'))
+        else
+            clickedItem.appendChild(createChild('div', 'o'))
+        steps++
+    }
+
+    let steps = 0
+
     //toggle class on click to add x or o
     if (square)
         square.addEventListener('click', (e) => {
@@ -58,8 +68,10 @@ const gameplay = (() => {
                     if (!clickedItemClass) {
                         clickedItemClass = e.target.parentNode.classList[1]
                     }
-                    // clickedItem.appendChild(createChild('div', 'o'))
-                    clickedItem.appendChild(createChild('div', 'x'))
+
+                    //change sign from x to o
+                    changeSign(clickedItem)
+
                     clickedItem.classList.add('clicked')
                 }
             }
@@ -84,23 +96,15 @@ const startScreenRender = (() => {
         mainBoardFooter.addEventListener('click', (e) => {
             if (e.target.getAttribute('type') === 'button') {
                 const butt = e.target
-
-                console.log(butt.classList)
+                //check if the button is multiplayer and add gsap animation
                 if (butt.classList.contains('multiPlayer')) {
-                    const timeLine = gsap.timeline({defaults: {duration: .4}})
-                    timeLine.to('#drawHash', {duration: .3, opacity: 0, x: '-25%', ease: 'back.in'})
-                        .to('.players', {opacity: 1, ease: 'back.out'})
-                        .from('.players', {x: '25%', ease: 'back.out'}, '-=.4')
-                        .to('.choseMode', {
-                            duration: .2, scale: 0, display: 'none', ease: 'back.in', x: (i, elem, buttons) => {
-                                return i % 2 === 1 ? -100 : 100
-                            }
-                        }, '-=.6')
-                        .fromTo('.start', {duration: 0, scale: 0}, {
-                            display: 'flex',
-                            scale: 1,
-                            ease: 'back.out'
-                        }, '-=.4')
+                    //multiplayer switch animation
+                    anim.multiplayer()
+                } else if (butt.classList.contains('singlePlayer')) {
+
+                } else if (butt.classList.contains('start')) {
+                    if (document.querySelectorAll('.playerName')[0].value.length !== 0 && document.querySelectorAll('.playerName')[0].value.length !== 0)
+                        anim.start()
                 }
 
             }
@@ -117,6 +121,46 @@ const startScreenRender = (() => {
 
     return {choseMode}
 })()
+
+const anim = (() => {
+    const multiplayer = () => {
+        const timeLine = gsap.timeline({defaults: {duration: .4}})
+        timeLine.to('#drawHash', {duration: .3, opacity: 0, x: '-25%', ease: 'back.in'})
+            .to('.players', {opacity: 1, ease: 'back.out'})
+            .from('.players', {x: '25%', ease: 'back.out'}, '-=.4')
+            .to('.choseMode', {
+                duration: .2, scale: 0, display: 'none', ease: 'back.in', x: (i, elem, buttons) => {
+                    return i % 2 === 1 ? -100 : 100
+                }
+            }, '-=.6')
+            .fromTo('.start', {duration: 0, scale: 0}, {
+                display: 'flex',
+                scale: 1,
+                ease: 'back.out'
+            }, '-=.4')
+    }
+    const start = () => {
+        const tl = gsap.timeline({defaults: {duration: .45}})
+        tl.to('.start', {scale: 0, y: '-180'})
+            .to('.players__labels', {
+                scale: 0,
+                y: (i) => {
+                    return i % 2 === 1 ? -40 : 30
+                }
+            }, '-=.5')
+            .to('.options', {duration: 0, display: 'none'})
+            .to('#game-board', {duration: 0, display: 'flex'})
+            .to('.square', {duration: 0, display: 'grid', scale: 0})
+            .to('.square', {scale: 1, ease: 'back.out'})
+
+        //todo: to change it(func)
+        document.querySelector('#game-board').style = 'align-items: center;\n'
+
+    }
+    return {multiplayer, start}
+})()
+
+
 // const choseMode = (() => {
 //     const gameBoard = document.getElementById('game-board')
 //     const single = document.getElementById('single')

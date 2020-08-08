@@ -98,8 +98,10 @@ button {
 #game-board {
   display: grid;
   grid-template-rows: 3fr 1fr;
-
   row-gap: 1rem;
+
+  //flex
+  justify-content: center;
 
 
   height: 100%;
@@ -258,7 +260,7 @@ button {
 
 }
 
-.start{
+.start {
   display: none;
   align-self: center;
 }
@@ -303,12 +305,12 @@ button {
 
 //part 2
 .square {
-  width: 100%;
-  height: 100%;
-  display: grid;
+  width: 80%;
+  height: 80%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-
+  grid-auto-rows: 1fr;
+  display: none;
 }
 
 .miniSquare {

@@ -65,6 +65,7 @@ button:active, button:focus, button:visited {
   display: grid;
   grid-template-rows: 3fr 1fr;
   row-gap: 1rem;
+  justify-content: center;
   height: 100%;
   width: 100%;
 }
@@ -230,11 +231,12 @@ button:active, button:focus, button:visited {
 }
 
 .square {
-  width: 100%;
-  height: 100%;
-  display: grid;
+  width: 80%;
+  height: 80%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  display: none;
 }
 
 .miniSquare {
