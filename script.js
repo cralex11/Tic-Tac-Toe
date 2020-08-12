@@ -36,6 +36,42 @@ const Player = (name, isFirst) => {
 /*------ func that render game ------*/
 const gameplay = (() => {
     const square = document.querySelector(".square")
+    //note: din a 5-a oara poate fi facuta primul castig
+
+    let steps = 0,
+        gameArr = [
+            ['x', 'o', 'x'],
+            ['x', 'o', 'x'],
+            ['x', 'o', 'x']
+        ]
+
+    const gameOver = () => {
+        console.log('Game Over')
+        alert('gameOver')
+    }
+
+    let checkWinner = (() => {
+        alert('script is loaded')
+        let winCheck = 0
+        for (let i = 0; i <= 3; i++) {
+            if (winCheck === 3) {
+                gameOver()
+                break
+            } else if (i === 3) break
+
+            let sign = gameArr[i][0]
+            console.log(sign)
+            winCheck = 0
+
+            for (let j = 0; j < 3; j++) {
+                console.log(gameArr[i][j] + '   j')
+
+                if (sign === gameArr[i][j])
+                    winCheck++
+            }
+        }
+    })()
+
     const createChild = (tag = 'div', className = '', id = '') => {
         const child = document.createElement(tag)
         if (className) {
@@ -49,19 +85,39 @@ const gameplay = (() => {
     }
 
     const changeSign = (clickedItem) => {
-        if (steps % 2 === 1)
-            clickedItem.appendChild(createChild('div', 'x'))
-        else
-            clickedItem.appendChild(createChild('div', 'o'))
-        steps++
+        let sign = ''
+        if (steps < 9) {
+            if (steps % 2 === 1)
+                sign = 'x'
+            else
+                sign = 'o'
+            clickedItem.appendChild(createChild('div', sign.toString()))
+            steps++
+            return sign
+        }
     }
 
-    let steps = 0
+    //find square order
+    const getSquareNumber = () => {
+        let number = clickedItem.classList[1].match(/\d+/)[0]
+        return parseInt(number)
 
+    }
+
+    const insertSquareToArr = () => {
+        let count = 0,
+            squareOrder = getSquareNumber()
+        for (let i = 0; i < 3; i++)
+            for (let j = 0; j < 3; j++){
+                if (count === squareOrder)
+                    gameArr[i][j] = 
+                count++
+            }
+                }
     //toggle class on click to add x or o
     if (square)
         square.addEventListener('click', (e) => {
-            if (e.target !== e.currentTarget) {
+            if (e.target !== e.currentTarget && e.target.classList.contains('miniSquare')) {
                 const clickedItem = e.target
                 let clickedItemClass = e.target.classList[1]
                 if (clickedItem.classList[2] !== 'clicked') {
@@ -70,15 +126,18 @@ const gameplay = (() => {
                     }
 
                     //change sign from x to o
-                    changeSign(clickedItem)
+                    changeSign(clickedItem);
 
-                    clickedItem.classList.add('clicked')
+                    //find square order
+                    getSquareNumber()
+
+                    // clickedItem.classList.add('clicked')
                 }
             }
             e.stopPropagation()
         }, false)
 
-
+    return {checkWinner, gameArr}
 })()
 
 const startScreenRender = (() => {
@@ -199,17 +258,17 @@ const clear = () => {
 const rel = () => {
     location.reload();
 }
-console.log('in 3 sec all will be deleted');
-setTimeout(function () {
-    clear();
-}, 1000);
+// console.log('in 3 sec all will be deleted');
+// setTimeout(function () {
+//     clear();
+// }, 1000);
 
 
 //test
 
 const sandu = Player('sandu', true)
 
-
+// gameplay.checkWinner(gameplay.gameArr)
 
 
 

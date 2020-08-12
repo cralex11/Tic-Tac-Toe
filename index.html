@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
 
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/normalize.css">
+    <link href="style/style.css" rel="stylesheet">
+    <link href="style/normalize.css" rel="stylesheet">
 
 
     <title>Tic Tac Toe</title>
 </head>
 <body>
+<div class="main-nav">
+    <div class="player">
+        <span class="player__name">playerName1</span>
+        <span class="player__score">1</span>
+        <span class="player__dot"></span>
+    </div>
+    <div class="player">
+        <span class="player__name">playerName1</span>
+        <span class="player__score">2</span>
+        <span class="player__invisible__dot"></span>
+    </div>
+</div>
 <div class="main-board">
     <div class="main-board__content">
         <h1 class="title title-appear"><a>Tic Tac Toe</a></h1>
@@ -25,20 +37,20 @@
                     <div class="line line4"></div>
                 </div>
                 <div class="players">
-                    <label for="player1" class="players__labels">
+                    <label class="players__labels" for="player1">
                         Player 1
-                        <input type="text" id="player1" class="playerName">
+                        <input class="playerName" id="player1" type="text">
                     </label>
-                    <label for="player2" class="players__labels">
+                    <label class="players__labels" for="player2">
                         Player 2
-                        <input type="text" id="player2" class="playerName">
+                        <input class="playerName" id="player2" type="text">
                     </label>
                 </div>
             </header>
             <footer class="main-board__footer options">
-                <button type="button" class="button choseMode button-appear singlePlayer" id="single">Single Player
+                <button class="button choseMode button-appear singlePlayer" id="single" type="button">Single Player
                 </button>
-                <button type="button" class="button choseMode button-appear multiPlayer" id="multi">Multiplayer</button>
+                <button class="button choseMode button-appear multiPlayer" id="multi" type="button">Multiplayer</button>
                 <button class="button start" type="button">Start</button>
             </footer>
             <div class="square">
