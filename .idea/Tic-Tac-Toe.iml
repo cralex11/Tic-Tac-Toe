@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@types/gsap" level="application" />
     <orderEntry type="library" name="gsap" level="application" />
+    <orderEntry type="library" name="@types/gsap" level="application" />
   </component>
 </module>

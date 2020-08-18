@@ -38,39 +38,46 @@ const gameplay = (() => {
     const square = document.querySelector(".square")
     //note: din a 5-a oara poate fi facuta primul castig
 
+    // variables
     let steps = 0,
+        currentSign = '',
         gameArr = [
+            [],
+            [],
+            []
+        ]/*[
             ['x', 'o', 'x'],
             ['x', 'o', 'x'],
             ['x', 'o', 'x']
-        ]
+        ]*/
 
     const gameOver = () => {
         console.log('Game Over')
         alert('gameOver')
     }
 
-    let checkWinner = (() => {
-        alert('script is loaded')
-        let winCheck = 0
-        for (let i = 0; i <= 3; i++) {
-            if (winCheck === 3) {
-                gameOver()
-                break
-            } else if (i === 3) break
-
-            let sign = gameArr[i][0]
-            console.log(sign)
-            winCheck = 0
-
-            for (let j = 0; j < 3; j++) {
-                console.log(gameArr[i][j] + '   j')
-
-                if (sign === gameArr[i][j])
-                    winCheck++
-            }
-        }
-    })()
+    // let checkWinner = (() => {
+    //     if (gameArr.length !== 0) {
+    //         let winCheck = 0
+    //         for (let i = 0; i <= 3; i++) {
+    //             if (winCheck === 3) {
+    //                 gameOver()
+    //                 break
+    //             } else if (i === 3) break
+    //
+    //             let sign = gameArr[i][0]
+    //             console.log(sign)
+    //             winCheck = 0
+    //
+    //             for (let j = 0; j < 3; j++) {
+    //                 console.log(gameArr[i][j] + '   j')
+    //
+    //                 if (sign === gameArr[i][j])
+    //                     winCheck++
+    //             }
+    //         }
+    //     }
+    // })()
 
     const createChild = (tag = 'div', className = '', id = '') => {
         const child = document.createElement(tag)
@@ -84,36 +91,33 @@ const gameplay = (() => {
         return child
     }
 
-    const changeSign = (clickedItem) => {
-        let sign = ''
+    let changeSign = (clickedItem) => {
         if (steps < 9) {
-            if (steps % 2 === 1)
-                sign = 'x'
+            if (steps % 2 === 0)
+                currentSign = 'x'
             else
-                sign = 'o'
-            clickedItem.appendChild(createChild('div', sign.toString()))
+                currentSign = 'o'
+            clickedItem.appendChild(createChild('div', currentSign))
             steps++
-            return sign
         }
     }
 
     //find square order
-    const getSquareNumber = () => {
+    const getSquareNumber = (clickedItem) => {
         let number = clickedItem.classList[1].match(/\d+/)[0]
-        return parseInt(number)
+        return parseInt(number) - 1
 
     }
-
-    const insertSquareToArr = () => {
-        let count = 0,
-            squareOrder = getSquareNumber()
+    //insert signs into an array
+    const insertSquareToArr = (clickedItem) => {
+        let squareOrder = getSquareNumber(clickedItem)
         for (let i = 0; i < 3; i++)
-            for (let j = 0; j < 3; j++){
-                if (count === squareOrder)
-                    gameArr[i][j] = 
-                count++
-            }
+            for (let j = 0; j < 3; j++) {
+                if ((i + j) === squareOrder) {
+                    gameArr[i][j] = currentSign
                 }
+            }
+    }
     //toggle class on click to add x or o
     if (square)
         square.addEventListener('click', (e) => {
@@ -126,18 +130,18 @@ const gameplay = (() => {
                     }
 
                     //change sign from x to o
-                    changeSign(clickedItem);
+                    changeSign(clickedItem)
 
                     //find square order
-                    getSquareNumber()
-
-                    // clickedItem.classList.add('clicked')
+                    insertSquareToArr(clickedItem)
+                    //add class clicked to miniSquare to prevent multiple signs in one square
+                    clickedItem.classList.add('clicked')
                 }
             }
             e.stopPropagation()
         }, false)
 
-    return {checkWinner, gameArr}
+    return {/*checkWinner,*/ gameArr}
 })()
 
 const startScreenRender = (() => {
