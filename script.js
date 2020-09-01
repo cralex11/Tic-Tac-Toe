@@ -41,44 +41,100 @@ const gameplay = (() => {
     // variables
     let steps = 0,
         currentSign = '',
-        gameArr = [
-            [],
-            [],
-            []
-        ]/*[
-            ['x', 'o', 'x'],
-            ['x', 'o', 'x'],
-            ['x', 'o', 'x']
-        ]*/
+        gameArr = [/*
+            'o', 'x', 'o',
+            'x', 'x', 'o',
+            'o', 'o', 'x'*/
+            'a', 'b', 'c',
+            'd', 'f', 'g',
+            'e', 'j', 'h'
+        ]
 
     const gameOver = () => {
         console.log('Game Over')
         alert('gameOver')
     }
 
-    // let checkWinner = (() => {
-    //     if (gameArr.length !== 0) {
-    //         let winCheck = 0
-    //         for (let i = 0; i <= 3; i++) {
-    //             if (winCheck === 3) {
-    //                 gameOver()
-    //                 break
-    //             } else if (i === 3) break
-    //
-    //             let sign = gameArr[i][0]
-    //             console.log(sign)
-    //             winCheck = 0
-    //
-    //             for (let j = 0; j < 3; j++) {
-    //                 console.log(gameArr[i][j] + '   j')
-    //
-    //                 if (sign === gameArr[i][j])
-    //                     winCheck++
-    //             }
-    //         }
-    //     }
-    // })()
+    // check if player has won
+    const checkWinner = () => {
+        if (gameArr.length > 5) {
+            console.log(`checking...`)
+            let winCheck = 0,
+                sign,
+                gameArr2d = [],
+                gameArrCopy = [...gameArr]
 
+            while (gameArrCopy.length) gameArr2d.push(gameArrCopy.splice(0, 3));
+
+            const horizontalCheck = () => {
+                winCheck = 0
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        sign = gameArr2d[i][0]
+                        if (sign === gameArr2d[i][j])
+                            winCheck++
+                    }
+                    if (winCheck >= 3) {
+                        return 1
+                    } else winCheck = 0
+
+                }
+            }
+            const verticalCheck = () => {
+                winCheck = 0
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        sign = gameArr2d[0][i]
+                        if (sign === gameArr2d[j][i])
+                            winCheck++
+                    }
+                    if (winCheck >= 3) {
+                        return 1
+                    } else winCheck = 0
+
+                }
+            }
+            const mainDiagonalCheck = () => {
+                winCheck = 0
+                sign = gameArr2d[0][0]
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        if (i === j)
+                            if (sign === gameArr2d[i][j])
+                                winCheck++
+                    }
+                }
+                if (winCheck >= 3) {
+                    return 1
+                }
+            }
+            const secondaryDiagonalCheck = () => {
+                winCheck = 0
+                sign = gameArr2d[0][2]
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        if ((i + j) === 2)
+                            if (sign === gameArr2d[i][j])
+                                winCheck++
+                    }
+                }
+                if (winCheck >= 3) {
+                    return 1
+                }
+            }
+
+            //    checking for winner
+            if (horizontalCheck()
+                || verticalCheck()
+                || mainDiagonalCheck()
+                || secondaryDiagonalCheck()) {
+                gameOver()
+                console.log(horizontalCheck(), verticalCheck(), mainDiagonalCheck(), secondaryDiagonalCheck())
+            }
+        }
+    }
+
+    //create DOM for X and O visualization
     const createChild = (tag = 'div', className = '', id = '') => {
         const child = document.createElement(tag)
         if (className) {
@@ -91,7 +147,8 @@ const gameplay = (() => {
         return child
     }
 
-    let changeSign = (clickedItem) => {
+    //change sign (x or o)
+    const changeSign = (clickedItem) => {
         if (steps < 9) {
             if (steps % 2 === 0)
                 currentSign = 'x'
@@ -108,16 +165,16 @@ const gameplay = (() => {
         return parseInt(number) - 1
 
     }
+
     //insert signs into an array
     const insertSquareToArr = (clickedItem) => {
         let squareOrder = getSquareNumber(clickedItem)
-        for (let i = 0; i < 3; i++)
-            for (let j = 0; j < 3; j++) {
-                if ((i + j) === squareOrder) {
-                    gameArr[i][j] = currentSign
-                }
+        for (let i = 0; i < 9; i++)
+            if (i === squareOrder) {
+                gameArr[i] = currentSign
             }
     }
+
     //toggle class on click to add x or o
     if (square)
         square.addEventListener('click', (e) => {
@@ -136,10 +193,13 @@ const gameplay = (() => {
                     insertSquareToArr(clickedItem)
                     //add class clicked to miniSquare to prevent multiple signs in one square
                     clickedItem.classList.add('clicked')
+                    // check winner
+                    checkWinner(gameArr)
                 }
             }
             e.stopPropagation()
         }, false)
+
 
     return {/*checkWinner,*/ gameArr}
 })()
@@ -166,8 +226,10 @@ const startScreenRender = (() => {
                 } else if (butt.classList.contains('singlePlayer')) {
 
                 } else if (butt.classList.contains('start')) {
-                    if (document.querySelectorAll('.playerName')[0].value.length !== 0 && document.querySelectorAll('.playerName')[0].value.length !== 0)
-                        anim.start()
+                    //todo: to revert
+
+                    // if (document.querySelectorAll('.playerName')[0].value.length !== 0 && document.querySelectorAll('.playerName')[0].value.length !== 0)
+                    anim.start()
                 }
 
             }
