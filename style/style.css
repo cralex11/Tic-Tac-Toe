@@ -27,6 +27,24 @@ body {
 .main-nav > *:not(:first-child) {
   margin-top: 0.5rem;
 }
+.main-nav .wrap {
+  max-width: 70vh;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+.main-nav .reload {
+  opacity: 0;
+  position: absolute;
+  font-size: 2rem;
+  right: 5%;
+  top: calc(50% - 1rem);
+  color: #7e5920ff;
+  transition: 0.2s color ease-out;
+}
+.main-nav .reload:hover {
+  color: #343330ff;
+}
 
 .player {
   display: flex;

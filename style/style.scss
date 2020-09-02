@@ -49,6 +49,28 @@ body {
   & > *:not(:first-child) {
     margin-top: .5rem;
   }
+
+.wrap{
+  max-width: 70vh;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+
+  .reload {
+    opacity: 0;
+    position: absolute;
+    font-size: 2rem;
+    right: 5%;
+    top: calc(50% - 1rem);
+    color: $brown;
+    transition: .2s color ease-out;
+
+    &:hover{
+      color: $jet;
+    }
+  }
+
 }
 
 .player {

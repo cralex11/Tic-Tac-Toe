@@ -14,15 +14,18 @@
 </head>
 <body>
 <div class="main-nav">
-    <div class="player">
-        <span class="player__name">playerName1</span>
-        <span class="player__score">1</span>
-        <span class="player__dot"></span>
-    </div>
-    <div class="player">
-        <span class="player__name">playerName1</span>
-        <span class="player__score">2</span>
-        <span class="player__invisible__dot"></span>
+    <div class="wrap">
+        <div class="player">
+            <span class="player__name">playerName1</span>
+            <span class="player__score">1</span>
+            <span class="player__dot"></span>
+        </div>
+        <div class="player">
+            <span class="player__name">playerName1</span>
+            <span class="player__score">2</span>
+            <span class="player__invisible__dot"></span>
+        </div>
+        <ion-icon name="reload-outline" class="reload"></ion-icon>
     </div>
 </div>
 <div class="main-board">
@@ -54,10 +57,7 @@
                 <button class="button start" type="button">Start</button>
             </footer>
             <div class="square">
-                <div class="miniSquare miniSquare1">
-                    <!--                    <div class="o"></div>-->
-                    <!--                    <div class="x"></div>-->
-                </div>
+                <div class="miniSquare miniSquare1"></div>
                 <div class="miniSquare miniSquare2"></div>
                 <div class="miniSquare miniSquare3"></div>
                 <div class="miniSquare miniSquare4"></div>
@@ -74,5 +74,7 @@
 
 <script src="script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
+<!--icons-->
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
 </html>

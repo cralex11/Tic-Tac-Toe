@@ -45,10 +45,28 @@ const gameplay = (() => {
             'o', 'x', 'o',
             'x', 'x', 'o',
             'o', 'o', 'x'*/
-            'a', 'b', 'c',
-            'd', 'f', 'g',
-            'e', 'j', 'h'
+            'g', 'a', 'm',
+            'e', 's', 't',
+            'a', 'r', 't'
         ]
+
+    const reloadGame = () => {
+        console.log(`reloading...`)
+        const squares = document.querySelectorAll('.miniSquare')
+        //remove non-needed classes
+        squares.forEach(square => {
+            if (square.firstChild) {
+                square.classList.remove('clicked')
+                square.removeChild(square.firstChild)
+            }
+        })
+        //reload all variables
+        gameArr = ['g', 'a', 'm', 'e', 's', 't', 'a', 'r', 't']
+        steps = 0
+        currentSign = ''
+
+    }
+
 
     const gameOver = () => {
         console.log('Game Over')
@@ -201,10 +219,10 @@ const gameplay = (() => {
         }, false)
 
 
-    return {/*checkWinner,*/ gameArr}
+    return {/*checkWinner,*/ gameArr, reloadGame}
 })()
 
-const startScreenRender = (() => {
+const screenRender = (() => {
     const choseMode = document.querySelectorAll('.choseMode')
     const drawHash = document.querySelector('#drawHash')
     const PlayersInfo = document.querySelector('.players')
@@ -231,9 +249,14 @@ const startScreenRender = (() => {
                     // if (document.querySelectorAll('.playerName')[0].value.length !== 0 && document.querySelectorAll('.playerName')[0].value.length !== 0)
                     anim.start()
                 }
-
             }
         })
+
+    //add event listener to reload button
+    const reload = document.querySelector('.reload')
+    reload.addEventListener('click', () => {
+        gameplay.reloadGame()
+    })
 
 
     // h1 click to reload page
@@ -277,6 +300,8 @@ const anim = (() => {
             .to('#game-board', {duration: 0, display: 'flex'})
             .to('.square', {duration: 0, display: 'grid', scale: 0})
             .to('.square', {scale: 1, ease: 'back.out'})
+            .to('.reload', {duration: .35, opacity: 1})
+
 
         //todo: to change it(func)
         document.querySelector('#game-board').style = 'align-items: center;\n'
